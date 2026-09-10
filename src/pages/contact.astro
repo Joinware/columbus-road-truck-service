@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatAddress, getSite, phoneHref } from '../lib/content';
+
+const site = getSite();
+const sent = Astro.url.searchParams.get('sent') === '1';
+---
+
+<BaseLayout
+  title={`Contact | ${site.shopName}`}
+  description={`Contact ${site.shopName} at ${formatAddress(site.address)}. Call ${site.phone} for semi and commercial truck service.`}
+>
+  <header class="page-hero">
+    <div class="container">
+      <p class="eyebrow" style="color: #f0c48a;">Contact</p>
+      <h1>Call, visit, or send a note</h1>
+      <p>We’re on Columbus Rd — easy to find, easy to talk to.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container split">
+      <div class="contact-card">
+        {
+          sent && (
+            <p
+              role="status"
+              style="margin: 0; padding: 0.9rem 1rem; background: #dfe8d8; border-left: 4px solid #5d7a3a;"
+            >
+              Thanks — your message was sent. We’ll get back to you soon, or call {site.phone} if it’s urgent.
+            </p>
+          )
+        }
+        <div>
+          <h3>Address</h3>
+          <p>
+            {site.address.street}<br />
+            {site.address.city}, {site.address.state} {site.address.zip}
+          </p>
+          <p>
+            <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+          </p>
+        </div>
+
+        <div>
+          <h3>Phone & email</h3>
+          <p>
+            <a href={phoneHref(site.phone)}>{site.phone}</a><br />
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+        </div>
+
+        <div>
+          <h3>Hours</h3>
+          <ul class="hours">
+            {
+              site.hours.map((row) => (
+                <li>
+                  <span>{row.days}</span>
+                  <span>{row.time}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href={phoneHref(site.phone)}>Call now</a>
+          <a class="btn btn-outline" href={site.mapUrl} target="_blank" rel="noopener noreferrer">
+            Directions
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <iframe
+          class="map-frame"
+          title={`Map to ${site.shopName}`}
+          src={site.mapEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+
+        <form
+          class="contact-form"
+          style="margin-top: 1rem;"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="/contact/?sent=1"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="sr-only">
+            <label>
+              Don’t fill this out if you’re human:
+              <input name="bot-field" />
+            </label>
+          </p>
+
+          <label>
+            Name
+            <input type="text" name="name" required autocomplete="name" />
+          </label>
+          <label>
+            Phone
+            <input type="tel" name="phone" autocomplete="tel" />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+          <label>
+            Message
+            <textarea name="message" required placeholder="What do you need help with?"></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <p style="margin: 0; font-size: 0.95rem; color: var(--steel);">
+            On Netlify this form is saved in your site dashboard. Elsewhere it works as a normal POST —
+            or email us at
+            <a href={`mailto:${site.email}?subject=Service%20request`}>{site.email}</a>.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

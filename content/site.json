@@ -1,0 +1,42 @@
+{
+  "_note": "Edit phone, hours, address, etc. Then redeploy. See CONTENT.md for help.",
+  "shopName": "Columbus Road Truck Service",
+  "tagline": "Honest semi & commercial truck repair — right here on Columbus Rd.",
+  "headline": "Keep your rig rolling.",
+  "phone": "(614) 555-0142",
+  "email": "service@columbusroadtruck.com",
+  "address": {
+    "street": "111 Columbus Rd",
+    "city": "Columbus",
+    "state": "OH",
+    "zip": "43207"
+  },
+  "hours": [
+    { "days": "Monday – Friday", "time": "7:00 AM – 5:00 PM" },
+    { "days": "Saturday", "time": "8:00 AM – 12:00 PM" },
+    { "days": "Sunday", "time": "Closed" }
+  ],
+  "social": {
+    "facebook": "",
+    "instagram": ""
+  },
+  "seo": {
+    "title": "Columbus Road Truck Service | Semi & Commercial Truck Repair in Columbus, OH",
+    "description": "One-owner semi and commercial truck repair at 111 Columbus Rd, Columbus, OH. Tires, oil changes, brakes, air bags, inspections, and light body work."
+  },
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=111+Columbus+Rd,+Columbus,+OH",
+  "mapEmbedUrl": "https://maps.google.com/maps?q=111+Columbus+Rd,+Columbus,+OH&output=embed",
+  "chatWidget": {
+    "enabled": false,
+    "_note": "Wolof Teacher translation demo. Keep disabled while testing Crisp live chat (both use bottom-right).",
+    "scriptSrc": "https://wolof-teacher-chat.netlify.app/embed.js",
+    "siteKey": "pk_live_clinic_dakar_01",
+    "pack": "wo",
+    "defaultTarget": "wo",
+    "position": "bottom-right"
+  },
+  "crisp": {
+    "enabled": true,
+    "websiteId": "85e2caed-faba-4114-9a17-4286c0cf50d7"
+  }
+}

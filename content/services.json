@@ -1,0 +1,34 @@
+{
+  "_note": "To add a service: copy one item block below, paste it in the list, fill in name + description. Optional: add \"price\". Order here = order on the website. See CONTENT.md.",
+  "intro": "We focus on the everyday work that keeps commercial trucks safe and on the road. Call ahead and we’ll get you scheduled.",
+  "items": [
+    {
+      "name": "Tire sales & changes",
+      "description": "Commercial tire sales, mounts, dismounts, and roadside-ready changes for semis and fleet trucks."
+    },
+    {
+      "name": "Oil changes",
+      "description": "Diesel oil and filter service with the right grade for your engine — done right the first time."
+    },
+    {
+      "name": "Brakes",
+      "description": "Brake inspections, shoe and pad work, and adjustments so you can stop with confidence."
+    },
+    {
+      "name": "Air bags",
+      "description": "Air suspension bag diagnosis and replacement to keep your ride height and load stable."
+    },
+    {
+      "name": "Inspections",
+      "description": "DOT-minded safety checks and pre-trip style inspections before you’re back on the highway."
+    },
+    {
+      "name": "Light body work",
+      "description": "Minor body and bumper repairs, brackets, and light cosmetic fixes — no full collision shop needed."
+    },
+    {
+      "name": "Light repairs",
+      "description": "Filters, lights, fluids, belts, and other straightforward repairs that don’t belong in a dealer bay."
+    }
+  ]
+}

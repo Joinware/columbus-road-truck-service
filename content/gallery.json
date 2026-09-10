@@ -1,0 +1,18 @@
+{
+  "_note": "Put photo files in public/images/, then list the filename here. To add a photo: copy a block, change file + caption.",
+  "intro": "A look at the kind of work we do — real trucks, real tires, real shop floors.",
+  "images": [
+    {
+      "file": "gallery-truck-bay.jpg",
+      "caption": "Commercial trucks welcome in the bay"
+    },
+    {
+      "file": "gallery-tires.jpg",
+      "caption": "Tire and undercarriage work"
+    },
+    {
+      "file": "gallery-shop.jpg",
+      "caption": "Straightforward service — no runaround"
+    }
+  ]
+}

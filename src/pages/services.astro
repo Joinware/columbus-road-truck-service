@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getServices, getSite } from '../lib/content';
+
+const site = getSite();
+const services = getServices();
+---
+
+<BaseLayout
+  title={`Services | ${site.shopName}`}
+  description="Tire sales and changes, oil changes, brakes, air bags, inspections, light body work, and light repairs for semis and commercial trucks in Columbus, OH."
+>
+  <header class="page-hero">
+    <div class="container">
+      <p class="eyebrow" style="color: #f0c48a;">Services</p>
+      <h1>Work that keeps you on the road</h1>
+      <p>{services.intro}</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <ul class="services-list">
+        {
+          services.items.map((item, index) => (
+            <li style={`animation-delay: ${0.04 * index}s`}>
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+              {item.price ? <span class="price">{item.price}</span> : null}
+            </li>
+          ))
+        }
+      </ul>
+      <p style="margin-top: 2rem; color: var(--steel);">
+        Don’t see what you need? Call {site.phone} — if it’s a light repair we can handle, we’ll say so.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

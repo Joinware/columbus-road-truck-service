@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  formatAddress,
+  getGallery,
+  getServices,
+  getSite,
+  phoneHref,
+} from '../lib/content';
+
+const site = getSite();
+const services = getServices();
+const gallery = getGallery();
+const featured = services.items.slice(0, 5);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero__media" aria-hidden="true">
+      <img
+        src="/images/hero-truck.jpg"
+        alt=""
+        width="1920"
+        height="1280"
+        fetchpriority="high"
+      />
+      <div class="hero__scrim"></div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__brand">{site.shopName}</p>
+      <h1 class="hero__headline">{site.headline}</h1>
+      <p class="hero__tagline">{site.tagline}</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href={phoneHref(site.phone)}>Call {site.phone}</a>
+        <a class="btn btn-ghost" href={site.mapUrl} target="_blank" rel="noopener noreferrer">
+          Directions
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <div class="band__inner">
+      <span>{formatAddress(site.address)}</span>
+      <a href={phoneHref(site.phone)}>{site.phone}</a>
+      <span>{site.hours[0]?.days}: {site.hours[0]?.time}</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What we do</p>
+        <h2>Everyday truck work, done local.</h2>
+        <p>{services.intro}</p>
+      </div>
+      <ul class="services-list">
+        {
+          featured.map((item, index) => (
+            <li style={`animation-delay: ${0.05 * index}s`}>
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+              {item.price ? <span class="price">{item.price}</span> : null}
+            </li>
+          ))
+        }
+      </ul>
+      <p style="margin-top: 1.75rem;">
+        <a class="btn btn-outline" href="/services/">See all services</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--paper-deep);">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Shop floor</p>
+        <h2>Built for commercial trucks.</h2>
+        <p>{gallery.intro}</p>
+      </div>
+      <div class="gallery">
+        {
+          gallery.images.map((image) => (
+            <figure>
+              <img
+                src={`/images/${image.file}`}
+                alt={image.caption}
+                width="800"
+                height="600"
+                loading="lazy"
+              />
+              <figcaption>{image.caption}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Ready when you are</p>
+        <h2>Need tires, brakes, or a quick look?</h2>
+        <p>
+          One owner. Straight answers. Stop by at {site.address.street} or call
+          before you roll in.
+        </p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href={phoneHref(site.phone)}>Call the shop</a>
+        <a class="btn btn-outline" href="/contact/">Contact & hours</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

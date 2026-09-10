@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatAddress, getAboutHtml, getSite } from '../lib/content';
+
+const site = getSite();
+const aboutHtml = getAboutHtml();
+---
+
+<BaseLayout
+  title={`About | ${site.shopName}`}
+  description={`About ${site.shopName} — a one-owner semi and commercial truck shop at ${formatAddress(site.address)}.`}
+>
+  <header class="page-hero">
+    <div class="container">
+      <p class="eyebrow" style="color: #f0c48a;">About</p>
+      <h1>One owner. Straight talk.</h1>
+      <p>Local truck service without the dealer runaround.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-prose" set:html={aboutHtml} />
+      <p style="margin-top: 2rem;">
+        <a class="btn btn-outline" href="/contact/">Get in touch</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

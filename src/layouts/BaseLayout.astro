@@ -1,0 +1,136 @@
+---
+import '../styles/global.css';
+import { getSite } from '../lib/content';
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const site = getSite();
+const { title = site.seo.title, description = site.seo.description } = Astro.props;
+const path = Astro.url.pathname;
+const chat = site.chatWidget;
+const showChat = Boolean(chat?.enabled && chat.scriptSrc && chat.siteKey);
+const crisp = site.crisp;
+const showCrisp = Boolean(crisp?.enabled && crisp.websiteId);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Karla:wght@400;500;600&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="/">{site.shopName}</a>
+        <nav class="nav" aria-label="Primary">
+          <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+          <a href="/services/" aria-current={path.startsWith('/services') ? 'page' : undefined}>Services</a>
+          <a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a>
+          <a href="/contact/" aria-current={path.startsWith('/contact') ? 'page' : undefined}>Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div>
+          <strong>{site.shopName}</strong>
+          <p>
+            {site.address.street}<br />
+            {site.address.city}, {site.address.state} {site.address.zip}
+          </p>
+        </div>
+        <div>
+          <strong>Call</strong>
+          <p>
+            <a href={`tel:${site.phone.replace(/[^\d+]/g, '')}`}>{site.phone}</a><br />
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+        </div>
+        <div>
+          <strong>Hours</strong>
+          <p>
+            {
+              site.hours.map((row) => (
+                <span>
+                  {row.days}: {row.time}
+                  <br />
+                </span>
+              ))
+            }
+          </p>
+        </div>
+        {
+          (site.social.facebook || site.social.instagram) && (
+            <div>
+              <strong>Follow</strong>
+              <p>
+                {site.social.facebook && (
+                  <span>
+                    <a href={site.social.facebook} target="_blank" rel="noopener noreferrer">
+                      Facebook
+                    </a>
+                    <br />
+                  </span>
+                )}
+                {site.social.instagram && (
+                  <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">
+                    Instagram
+                  </a>
+                )}
+              </p>
+            </div>
+          )
+        }
+      </div>
+    </footer>
+
+    {
+      showChat && chat && (
+        <script
+          is:inline
+          src={chat.scriptSrc}
+          data-site-key={chat.siteKey}
+          data-pack={chat.pack ?? 'wo'}
+          data-default-target={chat.defaultTarget ?? 'wo'}
+          data-position={chat.position ?? 'bottom-right'}
+          async
+        />
+      )
+    }
+
+    {
+      showCrisp && crisp && (
+        <script is:inline define:vars={{ crispWebsiteId: crisp.websiteId }}>
+          window.$crisp = [];
+          window.CRISP_WEBSITE_ID = crispWebsiteId;
+          (function () {
+            var d = document;
+            var s = d.createElement('script');
+            s.src = 'https://client.crisp.chat/l.js';
+            s.async = 1;
+            d.getElementsByTagName('head')[0].appendChild(s);
+          })();
+        </script>
+      )
+    }
+  </body>
+</html>
