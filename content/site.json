@@ -27,16 +27,13 @@
   "mapUrl": "https://www.google.com/maps/search/?api=1&query=111+Columbus+Rd,+Columbus,+OH",
   "mapEmbedUrl": "https://maps.google.com/maps?q=111+Columbus+Rd,+Columbus,+OH&output=embed",
   "chatWidget": {
-    "enabled": false,
-    "_note": "Wolof Teacher translation demo. Keep disabled while testing Crisp live chat (both use bottom-right).",
-    "scriptSrc": "https://wolof-teacher-chat.netlify.app/embed.js",
-    "siteKey": "pk_live_clinic_dakar_01",
-    "pack": "wo",
-    "defaultTarget": "wo",
-    "position": "bottom-right"
+    "enabled": true,
+    "_note": "JokoHub live chat widget.",
+    "scriptSrc": "https://jokohub-rga9bzylr-joinware.vercel.app/widget.js",
+    "siteKey": "pk_live_pilot_dakar_01"
   },
   "crisp": {
-    "enabled": true,
+    "enabled": false,
     "websiteId": "85e2caed-faba-4114-9a17-4286c0cf50d7"
   }
 }

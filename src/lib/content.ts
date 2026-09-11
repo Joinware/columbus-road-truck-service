@@ -33,7 +33,7 @@ export type Site = {
   };
   mapUrl: string;
   mapEmbedUrl: string;
-  /** Optional Wolof Teacher translation demo embed (not live agent chat). */
+  /** Optional JokoHub chat widget embed. */
   chatWidget?: {
     enabled?: boolean;
     scriptSrc: string;
