@@ -37,6 +37,8 @@ export type Site = {
   chatWidget?: {
     enabled?: boolean;
     scriptSrc: string;
+    /** JokoHub API origin; required when the widget is hosted on a different domain. */
+    apiBase?: string;
     siteKey: string;
     pack?: string;
     defaultTarget?: string;

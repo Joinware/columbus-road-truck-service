@@ -106,8 +106,14 @@ const showCrisp = Boolean(crisp?.enabled && crisp.websiteId);
     {
       showChat && chat && (
         <>
-          <script is:inline define:vars={{ jokoHubKey: chat.siteKey }}>
-            window.JokoHubSettings = { key: jokoHubKey };
+          <script
+            is:inline
+            define:vars={{
+              jokoHubKey: chat.siteKey,
+              jokoHubApiBase: chat.apiBase ?? '',
+            }}
+          >
+            window.JokoHubSettings = { key: jokoHubKey, apiBase: jokoHubApiBase };
           </script>
           <script is:inline src={chat.scriptSrc} async />
         </>
