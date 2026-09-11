@@ -43,13 +43,6 @@
       "image": "services/service-body.jpg",
       "blurb": "Bumpers, brackets, and light cosmetic fixes.",
       "description": "Minor body and bumper repairs, brackets, and light cosmetic fixes — no full collision shop needed."
-    },
-    {
-      "name": "Light repairs",
-      "slug": "repairs",
-      "image": "services/service-repairs.jpg",
-      "blurb": "Filters, lights, fluids, belts, and straightforward fixes.",
-      "description": "Filters, lights, fluids, belts, and other straightforward repairs that don’t belong in a dealer bay."
     }
   ]
 }
