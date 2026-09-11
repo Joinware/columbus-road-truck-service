@@ -28,9 +28,9 @@
   "mapEmbedUrl": "https://maps.google.com/maps?q=111+Columbus+Rd,+Columbus,+OH&output=embed",
   "chatWidget": {
     "enabled": true,
-    "_note": "JokoHub live chat widget. apiBase must be the JokoHub origin (not this Netlify site).",
-    "scriptSrc": "https://jokohub-rga9bzylr-joinware.vercel.app/widget.js",
-    "apiBase": "https://jokohub-rga9bzylr-joinware.vercel.app",
+    "_note": "JokoHub live chat widget. Prefer stable production host over preview deploy URLs.",
+    "scriptSrc": "https://jokohub.vercel.app/widget.js",
+    "apiBase": "https://jokohub.vercel.app",
     "siteKey": "pk_live_pilot_dakar_01"
   },
   "crisp": {
