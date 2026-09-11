@@ -1,33 +1,54 @@
 {
-  "_note": "To add a service: copy one item block below, paste it in the list, fill in name + description. Optional: add \"price\". Order here = order on the website. See CONTENT.md.",
-  "intro": "We focus on the everyday work that keeps commercial trucks safe and on the road. Call ahead and we’ll get you scheduled.",
+  "_note": "To add a service: copy one item block, set name, slug, image, blurb, description. Optional: price. Order here = order on the website.",
+  "intro": "We focus on the everyday work that keeps commercial trucks safe and on the road. Pick a service — call the shop or ask online.",
   "items": [
     {
       "name": "Tire sales & changes",
+      "slug": "tires",
+      "image": "services/service-tires.jpg",
+      "blurb": "Commercial mounts, dismounts, and roadside-ready changes.",
       "description": "Commercial tire sales, mounts, dismounts, and roadside-ready changes for semis and fleet trucks."
     },
     {
       "name": "Oil changes",
+      "slug": "oil",
+      "image": "services/service-oil.jpg",
+      "blurb": "Diesel oil and filter service, done right the first time.",
       "description": "Diesel oil and filter service with the right grade for your engine — done right the first time."
     },
     {
       "name": "Brakes",
+      "slug": "brakes",
+      "image": "services/service-brakes.jpg",
+      "blurb": "Inspections, shoes, pads, and adjustments you can trust.",
       "description": "Brake inspections, shoe and pad work, and adjustments so you can stop with confidence."
     },
     {
       "name": "Air bags",
+      "slug": "air-bags",
+      "image": "services/service-airbags.jpg",
+      "blurb": "Air suspension diagnosis and bag replacement.",
       "description": "Air suspension bag diagnosis and replacement to keep your ride height and load stable."
     },
     {
       "name": "Inspections",
+      "slug": "inspections",
+      "image": "services/service-inspections.jpg",
+      "blurb": "DOT-minded safety checks before you roll.",
       "description": "DOT-minded safety checks and pre-trip style inspections before you’re back on the highway."
     },
     {
       "name": "Light body work",
+      "slug": "body-work",
+      "image": "services/service-body.jpg",
+      "blurb": "Bumpers, brackets, and light cosmetic fixes.",
       "description": "Minor body and bumper repairs, brackets, and light cosmetic fixes — no full collision shop needed."
     },
     {
       "name": "Light repairs",
+      "slug": "repairs",
+      "image": "services/service-repairs.jpg",
+      "blurb": "Filters, lights, fluids, belts, and straightforward fixes.",
       "description": "Filters, lights, fluids, belts, and other straightforward repairs that don’t belong in a dealer bay."
     }
   ]

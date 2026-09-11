@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCards from '../components/ServiceCards.astro';
 import {
   formatAddress,
   getGallery,
@@ -11,7 +12,6 @@ import {
 const site = getSite();
 const services = getServices();
 const gallery = getGallery();
-const featured = services.items.slice(0, 5);
 ---
 
 <BaseLayout>
@@ -47,27 +47,14 @@ const featured = services.items.slice(0, 5);
     </div>
   </div>
 
-  <section class="section">
+  <section class="section" id="services">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">What we do</p>
         <h2>Everyday truck work, done local.</h2>
         <p>{services.intro}</p>
       </div>
-      <ul class="services-list">
-        {
-          featured.map((item, index) => (
-            <li style={`animation-delay: ${0.05 * index}s`}>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              {item.price ? <span class="price">{item.price}</span> : null}
-            </li>
-          ))
-        }
-      </ul>
-      <p style="margin-top: 1.75rem;">
-        <a class="btn btn-outline" href="/services/">See all services</a>
-      </p>
+      <ServiceCards items={services.items} phone={site.phone} />
     </div>
   </section>
 

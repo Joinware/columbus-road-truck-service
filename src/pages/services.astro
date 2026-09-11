@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getServices, getSite } from '../lib/content';
+import ServiceCards from '../components/ServiceCards.astro';
+import { getServices, getSite, phoneHref } from '../lib/content';
 
 const site = getSite();
 const services = getServices();
@@ -15,22 +16,15 @@ const services = getServices();
       <p class="eyebrow" style="color: #f0c48a;">Services</p>
       <h1>Work that keeps you on the road</h1>
       <p>{services.intro}</p>
+      <div class="cta-row" style="margin-top: 1.25rem;">
+        <a class="btn btn-primary" href={phoneHref(site.phone)}>Call {site.phone}</a>
+      </div>
     </div>
   </header>
 
   <section class="section">
     <div class="container">
-      <ul class="services-list">
-        {
-          services.items.map((item, index) => (
-            <li style={`animation-delay: ${0.04 * index}s`}>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              {item.price ? <span class="price">{item.price}</span> : null}
-            </li>
-          ))
-        }
-      </ul>
+      <ServiceCards items={services.items} phone={site.phone} />
       <p style="margin-top: 2rem; color: var(--steel);">
         Don’t see what you need? Call {site.phone} — if it’s a light repair we can handle, we’ll say so.
       </p>

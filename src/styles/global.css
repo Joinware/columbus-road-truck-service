@@ -368,6 +368,177 @@ p:last-child {
   white-space: nowrap;
 }
 
+/* Mobile-first service cards */
+.service-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.15rem;
+  }
+}
+
+@media (min-width: 980px) {
+  .service-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  animation: fade-up 0.55s ease-out both;
+  min-height: 100%;
+}
+
+.service-card__media {
+  overflow: hidden;
+  background: var(--ink-soft);
+}
+
+.service-card__media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.05);
+}
+
+.service-card__body {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1rem 1rem 0.35rem;
+}
+
+.service-card__body h3 {
+  font-family: var(--font-brand);
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.service-card__body p {
+  margin: 0;
+  color: var(--steel);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.service-card .price {
+  font-family: var(--font-brand);
+  letter-spacing: 0.04em;
+  color: var(--amber-dark);
+}
+
+.service-card__actions {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem 1rem 1rem;
+  margin-top: auto;
+}
+
+.service-card__call {
+  width: 100%;
+  min-height: 3.15rem;
+  font-size: 1.02rem;
+}
+
+.service-card__ask {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 2.5rem;
+  font-family: var(--font-brand);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--steel);
+}
+
+.service-card__ask:hover,
+.service-card__ask:focus-visible {
+  color: var(--ink);
+}
+
+.service-card__ask:focus-visible,
+.service-card__call:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+.service-intent {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  background: #f7efe3;
+  border-left: 4px solid var(--amber);
+}
+
+/* Sticky mobile call bar — primary conversion path */
+.mobile-callbar {
+  display: none;
+}
+
+@media (max-width: 819px) {
+  body {
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .mobile-callbar {
+    display: block;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: 0.65rem var(--gutter) calc(0.65rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(22, 24, 26, 0.96);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 -10px 28px rgba(22, 24, 26, 0.28);
+  }
+
+  .mobile-callbar__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--amber);
+    color: var(--white);
+    border: 2px solid var(--amber);
+    font-family: var(--font-brand);
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .mobile-callbar__btn:hover,
+  .mobile-callbar__btn:focus-visible {
+    background: var(--amber-dark);
+    border-color: var(--amber-dark);
+    color: var(--white);
+  }
+
+  /* Keep chat launcher above the call bar */
+  #jokohub-root .jh-launcher {
+    bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  #jokohub-root .jh-panel {
+    bottom: calc(9.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
 .about-prose {
   max-width: 40rem;
   font-size: 1.125rem;
@@ -572,11 +743,13 @@ p:last-child {
 
   .hero__media img,
   .hero__content,
-  .services-list li {
+  .services-list li,
+  .service-card {
     animation: none;
   }
 
-  .btn:hover {
+  .btn:hover,
+  .service-card__link:hover .service-card__media img {
     transform: none;
   }
 }

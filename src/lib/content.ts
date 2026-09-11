@@ -53,7 +53,11 @@ export type Site = {
 
 export type Service = {
   name: string;
+  slug: string;
+  image: string;
   description: string;
+  /** Short line for mobile cards; falls back to description. */
+  blurb?: string;
   price?: string;
 };
 
@@ -125,9 +129,9 @@ export function getServices(): ServicesContent {
     );
   }
   for (const [index, item] of services.items.entries()) {
-    if (!item?.name || !item?.description) {
+    if (!item?.name || !item?.description || !item?.slug || !item?.image) {
       throw new Error(
-        `content/services.json item #${index + 1} needs both "name" and "description".`,
+        `content/services.json item #${index + 1} needs name, slug, image, and description.`,
       );
     }
   }

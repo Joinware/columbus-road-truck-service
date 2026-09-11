@@ -1,9 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { formatAddress, getSite, phoneHref } from '../lib/content';
+import { formatAddress, getServices, getSite, phoneHref } from '../lib/content';
 
 const site = getSite();
+const services = getServices();
 const sent = Astro.url.searchParams.get('sent') === '1';
+const serviceSlug = Astro.url.searchParams.get('service')?.trim() || '';
+const selectedService = services.items.find((item) => item.slug === serviceSlug);
+const messagePlaceholder = selectedService
+  ? `I need help with ${selectedService.name.toLowerCase()}…`
+  : 'What do you need help with?';
+const mailtoSubject = selectedService
+  ? `Service request: ${selectedService.name}`
+  : 'Service request';
 ---
 
 <BaseLayout
@@ -14,7 +23,16 @@ const sent = Astro.url.searchParams.get('sent') === '1';
     <div class="container">
       <p class="eyebrow" style="color: #f0c48a;">Contact</p>
       <h1>Call, visit, or send a note</h1>
-      <p>We’re on Columbus Rd — easy to find, easy to talk to.</p>
+      <p>
+        {
+          selectedService
+            ? `Looking for ${selectedService.name}? Call now or leave a note — we’ll get you scheduled.`
+            : 'We’re on Columbus Rd — easy to find, easy to talk to.'
+        }
+      </p>
+      <div class="cta-row" style="margin-top: 1.25rem;">
+        <a class="btn btn-primary" href={phoneHref(site.phone)}>Call {site.phone}</a>
+      </div>
     </div>
   </header>
 
@@ -28,6 +46,13 @@ const sent = Astro.url.searchParams.get('sent') === '1';
               style="margin: 0; padding: 0.9rem 1rem; background: #dfe8d8; border-left: 4px solid #5d7a3a;"
             >
               Thanks — your message was sent. We’ll get back to you soon, or call {site.phone} if it’s urgent.
+            </p>
+          )
+        }
+        {
+          selectedService && !sent && (
+            <p class="service-intent" role="status">
+              Service selected: <strong>{selectedService.name}</strong>
             </p>
           )
         }
@@ -46,7 +71,7 @@ const sent = Astro.url.searchParams.get('sent') === '1';
           <h3>Phone & email</h3>
           <p>
             <a href={phoneHref(site.phone)}>{site.phone}</a><br />
-            <a href={`mailto:${site.email}`}>{site.email}</a>
+            <a href={`mailto:${site.email}?subject=${encodeURIComponent(mailtoSubject)}`}>{site.email}</a>
           </p>
         </div>
 
@@ -91,6 +116,11 @@ const sent = Astro.url.searchParams.get('sent') === '1';
           action="/contact/?sent=1"
         >
           <input type="hidden" name="form-name" value="contact" />
+          {
+            selectedService && (
+              <input type="hidden" name="service" value={selectedService.name} />
+            )
+          }
           <p class="sr-only">
             <label>
               Don’t fill this out if you’re human:
@@ -104,7 +134,7 @@ const sent = Astro.url.searchParams.get('sent') === '1';
           </label>
           <label>
             Phone
-            <input type="tel" name="phone" autocomplete="tel" />
+            <input type="tel" name="phone" autocomplete="tel" inputmode="tel" />
           </label>
           <label>
             Email
@@ -112,13 +142,13 @@ const sent = Astro.url.searchParams.get('sent') === '1';
           </label>
           <label>
             Message
-            <textarea name="message" required placeholder="What do you need help with?"></textarea>
+            <textarea name="message" required placeholder={messagePlaceholder}></textarea>
           </label>
           <button class="btn btn-primary" type="submit">Send message</button>
           <p style="margin: 0; font-size: 0.95rem; color: var(--steel);">
-            On Netlify this form is saved in your site dashboard. Elsewhere it works as a normal POST —
-            or email us at
-            <a href={`mailto:${site.email}?subject=Service%20request`}>{site.email}</a>.
+            Prefer to talk? Call
+            <a href={phoneHref(site.phone)}>{site.phone}</a>
+            — fastest for most jobs.
           </p>
         </form>
       </div>

@@ -103,6 +103,12 @@ const showCrisp = Boolean(crisp?.enabled && crisp.websiteId);
       </div>
     </footer>
 
+    <div class="mobile-callbar" role="region" aria-label="Call the shop">
+      <a class="mobile-callbar__btn" href={`tel:${site.phone.replace(/[^\d+]/g, '')}`}>
+        Call {site.phone}
+      </a>
+    </div>
+
     {
       showChat && chat && (
         <>

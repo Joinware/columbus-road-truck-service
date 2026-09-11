@@ -1,0 +1,54 @@
+---
+import { phoneHref, type Service } from '../lib/content';
+
+type Props = {
+  items: Service[];
+  phone: string;
+};
+
+const { items, phone } = Astro.props;
+const callHref = phoneHref(phone);
+---
+
+<ul class="service-grid">
+  {
+    items.map((item, index) => {
+      const contactHref = `/contact/?service=${encodeURIComponent(item.slug)}`;
+      return (
+        <li class="service-card" style={`animation-delay: ${0.04 * index}s`}>
+          <div class="service-card__media">
+            <img
+              src={`/images/${item.image}`}
+              alt=""
+              width="800"
+              height="600"
+              loading={index < 2 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </div>
+          <div class="service-card__body">
+            <h3 id={`service-${item.slug}`}>{item.name}</h3>
+            <p>{item.blurb || item.description}</p>
+            {item.price ? <span class="price">{item.price}</span> : null}
+          </div>
+          <div class="service-card__actions">
+            <a
+              class="btn btn-primary service-card__call"
+              href={callHref}
+              aria-label={`Call about ${item.name}`}
+            >
+              Call about this
+            </a>
+            <a
+              class="service-card__ask"
+              href={contactHref}
+              aria-labelledby={`ask-${item.slug} service-${item.slug}`}
+            >
+              <span id={`ask-${item.slug}`}>Ask online</span>
+            </a>
+          </div>
+        </li>
+      );
+    })
+  }
+</ul>
