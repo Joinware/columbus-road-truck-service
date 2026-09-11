@@ -748,8 +748,7 @@ p:last-child {
     animation: none;
   }
 
-  .btn:hover,
-  .service-card__link:hover .service-card__media img {
+  .btn:hover {
     transform: none;
   }
 }
