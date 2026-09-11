@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceCards from '../components/ServiceCards.astro';
 import {
   formatAddress,
-  getGallery,
   getServices,
   getSite,
   phoneHref,
@@ -11,7 +10,6 @@ import {
 
 const site = getSite();
 const services = getServices();
-const gallery = getGallery();
 ---
 
 <BaseLayout>
@@ -59,32 +57,6 @@ const gallery = getGallery();
   </section>
 
   <section class="section" style="background: var(--paper-deep);">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Shop floor</p>
-        <h2>Built for commercial trucks.</h2>
-        <p>{gallery.intro}</p>
-      </div>
-      <div class="gallery">
-        {
-          gallery.images.map((image) => (
-            <figure>
-              <img
-                src={`/images/${image.file}`}
-                alt={image.caption}
-                width="800"
-                height="600"
-                loading="lazy"
-              />
-              <figcaption>{image.caption}</figcaption>
-            </figure>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Ready when you are</p>
